@@ -1,0 +1,17 @@
+#
+# Main database file
+#
+# Macros:
+#    P - prefix for ioc PVs
+#    PORT - name of the asyn stream port to use
+#    ADDR - 2 character internal address of the device
+
+
+record(ai, "$(P)PRESSURE")
+{
+	field(DESC, "Pressure readback")
+    field(SCAN, "1 second")
+    field(DTYP, "stream")
+    field(INP, "@amint2l.proto getPressure($(ADDR)) $(PORT)")
+
+}

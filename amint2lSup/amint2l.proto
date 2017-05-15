@@ -1,0 +1,8 @@
+
+Terminator = ETX;
+
+getPressure {
+    out STX, "\$1r";
+    in STX, "%#f";
+}
+
