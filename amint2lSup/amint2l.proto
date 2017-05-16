@@ -3,6 +3,7 @@ Terminator = ETX;
 
 getPressure {
     out STX, "\$1r";
-    in STX, "%#f";
+    in STX, "%#f"; 
+    @mismatch { in STX, "%(\$2)#{UR|OR}";}
 }
 
