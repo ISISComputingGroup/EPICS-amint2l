@@ -10,10 +10,13 @@
 record(ai, "$(P)PRESSURE")
 {
 	field(DESC, "Pressure readback")
+    field(EGU, "bar")
     field(SCAN, "1 second")
     field(DTYP, "stream")
     field(INP, "@amint2l.proto getPressure($(ADDR),$(P)RAW_ERROR) $(PORT)")
     field(FLNK, "$(P)RANGE:ERROR_CALC")
+    info(INTEREST, "HIGH")
+    info(archive, "VAL")
 }
 
 record(mbbi, "$(P)RAW_ERROR")
@@ -26,6 +29,7 @@ record(mbbi, "$(P)RAW_ERROR")
 
 record(calcout, "$(P)RANGE:ERROR_CALC") 
 {    
+    field(DESC, "Forward error if there is an error")
     field(INPA, "$(P)PRESSURE.STAT")
     field(INPB, "$(P)RAW_ERROR")
     field(CALC, "A==0?2:B")
@@ -35,8 +39,11 @@ record(calcout, "$(P)RANGE:ERROR_CALC")
 record(mbbi, "$(P)RANGE:ERROR")
 {
 	field(DESC, "Error in pressure readback")
+    field(EGU, "")
     field(SCAN, "Passive")
     field(ZRST, "Under Range")
     field(ONST, "Over Range")
     field(TWST, "No Error")
+    info(INTEREST, "MEDIUM")
+    info(archive, "VAL")
 }
