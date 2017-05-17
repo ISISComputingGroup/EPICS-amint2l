@@ -1,11 +1,31 @@
+record(bo, "$(P)SIM")
+{
+    field(SCAN, "Passive")
+    field(DTYP, "Soft Channel")
+    field(ZNAM, "NO")
+    field(ONAM, "YES")
+    field(VAL, "$(RECSIM=0)")
+}
+
+record(bo, "$(P)DISABLE") 
+{
+    field(DESC, "Disable comms")
+    field(PINI, "YES")
+    field(VAL, "$(DISABLE=0)")
+    field(OMSL, "supervisory")
+    field(ZNAM, "COMMS ENABLED")
+    field(ONAM, "COMMS DISABLED")
+}
+
 #
 # Main database file
 #
 # Macros:
 #    P - prefix for ioc PVs
 #    PORT - name of the asyn stream port to use
+#    RECSIM - rec sim mode
+#    DISABLE - disable communications
 #    ADDR - 2 character internal address of the device
-
 
 record(ai, "$(P)PRESSURE")
 {
@@ -17,6 +37,9 @@ record(ai, "$(P)PRESSURE")
     field(FLNK, "$(P)RANGE:ERROR_CALC")
     info(INTEREST, "HIGH")
     info(archive, "VAL")
+    field(SIML, "$(P)SIM")
+    field(SIOL, "$(P)SIM:PRESSURE")
+    field(SDIS, "$(P)DISABLE")
 }
 
 record(mbbi, "$(P)RAW_ERROR")
@@ -25,6 +48,8 @@ record(mbbi, "$(P)RAW_ERROR")
     field(SCAN, "Passive")
     field(ZRST, "Under Range")
     field(ONST, "Over Range")
+    field(PINI, "YES")
+    field(VAL, 0)
 }
 
 record(calcout, "$(P)RANGE:ERROR_CALC") 
@@ -46,4 +71,12 @@ record(mbbi, "$(P)RANGE:ERROR")
     field(TWST, "No Error")
     info(INTEREST, "MEDIUM")
     info(archive, "VAL")
+}
+
+### SIMULATION RECORDS ###
+
+record(ai, "$(P)SIM:PRESSURE")
+{
+    field(SCAN, "Passive")
+    field(DTYP, "Soft Channel")
 }
