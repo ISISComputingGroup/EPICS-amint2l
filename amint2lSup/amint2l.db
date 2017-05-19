@@ -65,7 +65,6 @@ record(calcout, "$(P)RANGE:ERROR_CALC")
 record(mbbi, "$(P)RANGE:ERROR")
 {
 	field(DESC, "Error in pressure readback")
-    field(EGU, "")
     field(SCAN, "Passive")
     field(ZRST, "Under Range")
     field(ZRSV, "MAJOR")
